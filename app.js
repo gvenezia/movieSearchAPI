@@ -2,11 +2,22 @@ var express = require("express");
 var app = express();
 var request = require("request");
 
+// Set up the app to expect ejs files
+app.set("view engine", "ejs");
+
+// Root Route
+app.get("/", function(req, res){
+   res.render("search");
+});
+
 // Example API call
 app.get("/results", function(req, res){
-   request("https://www.omdbapi.com/?apikey=thewdb&s=nexus", function(error, response, body){
+    var search = req.query.search;
+    var url = "https://www.omdbapi.com/?apikey=thewdb&s=" + search;
+    request(url, function(error, response, body){
         if (!error && response.statusCode === 200){
-            res.send(body);
+            var data = JSON.parse(body);
+            res.render("results", {data: data});
         }
    }); 
 });
