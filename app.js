@@ -22,7 +22,6 @@ app.get("/results", function(req, res){
    }); 
 });
 
-
 // Check that the server is running successfully
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The movie search app is running");
