@@ -10,7 +10,7 @@ app.get("/", function(req, res){
    res.render("search");
 });
 
-// Example API call
+// API call to OMDB using the search term entered in the root route
 app.get("/results", function(req, res){
     var search = req.query.search;
     var url = "https://www.omdbapi.com/?apikey=thewdb&s=" + search;
